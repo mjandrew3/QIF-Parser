@@ -1,2 +1,3 @@
-'venv' 
-'Quicken Data.QIF'
+venv/
+Quicken Data.QIF
+*.csv
