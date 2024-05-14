@@ -1,7 +1,8 @@
 # QIF-Parser
 Python Parser of QIF Quicken output file
 
-This script will read a .QIF file from Quicken and parse the contents to output X files:
+This script will read a .QIF file from Quicken and parse the contents to output 7 files:
+
     - Tags: Shows the specific tags you may have utilized, such as "Tax Related" or "Vacation"
     - Categories: Shows a breakdown of all the categories with their descriptions, Categorization, and Tax Schedule
     - Accounts: Shows a breakdown of all accounts included
