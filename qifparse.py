@@ -135,6 +135,11 @@ transaction_list = pd.DataFrame(transaction_list,columns=['Transaction ID','Acco
 transaction_list['Date'] = pd.to_datetime(transaction_list['Date'],format='%m/%d/%y')
 transaction_list = transaction_list.merge(account_rates,on='Account',how='left')
 transaction_list['Amount'] = transaction_list['Amount']*transaction_list['Rate']
+transaction_list[['Location','Date Applied']] = transaction_list['Memo'].str.split(" - ", expand=True)
+transaction_list['Date Applied'] = np.where(transaction_list['Date Applied'].str.len()==6,transaction_list['Date Applied'],"")
+transaction_list['Location'] = np.where(transaction_list['Date Applied'].str.len()==6,transaction_list['Location'],'')
+transaction_list['Date Applied'] = pd.to_datetime(transaction_list['Date Applied'], format = "%b %y", errors='coerce')
+transaction_list['Date Applied'] = np.where(transaction_list['Date Applied'].astype(str)!='NaT',transaction_list['Date Applied'],transaction_list['Date'])
 investment_list = pd.DataFrame(investment_list,columns=['Transaction ID','Account','Date','Action','Security','Price','Quantity','Amount','Commission','Cleared Status','Text','Memo','Transfer Account','Transfer Amount'])
 investment_list = investment_list.merge(account_rates,on='Account',how='left')
 investment_list['Date'] = pd.to_datetime(investment_list['Date'],format='%m/%d/%y')
